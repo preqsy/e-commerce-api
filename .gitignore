@@ -1,1 +1,6 @@
 venv
+app/__pycache__
+alembic/__pycache__
+schemas/__pycache__
+endpoints/__pycache__
+app/config.py
