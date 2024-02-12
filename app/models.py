@@ -11,4 +11,5 @@ class Products(Base):
     category = Column(String, nullable=False)
     description = Column(String, nullable=True)
     created_on = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text("now()"))
-    # features = Column(List)
+
+    
