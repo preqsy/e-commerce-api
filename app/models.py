@@ -11,5 +11,12 @@ class Products(Base):
     category = Column(String, nullable=False)
     description = Column(String, nullable=True)
     created_on = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text("now()"))
+    stock = Column(Integer, nullable=False)
 
-    
+class Users(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True, nullable=False)
+    full_name = Column(String, nullable=False)
+    email = Column(String, nullable=False, unique=True)
+    password = Column(String, nullable=False)
+    address = Column(String)
