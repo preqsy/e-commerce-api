@@ -21,15 +21,17 @@ class ProductCreate(BaseModel):
     name: constr(to_lower=True)
     description:str
     price:float
+    stock : int
     category:ProductCategoriesEnum
 class ProductUpdate(BaseModel):
     name: constr(to_lower=True)
     description:str
     price:float
-    
+    stock: int
 class ProductReturn(BaseModel):
-    name: constr(to_lower=True)
+    name: str
     description:str
     price:float
+    stock: int
     category:str
     

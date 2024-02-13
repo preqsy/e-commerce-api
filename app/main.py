@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from endpoints import products
+from endpoints import products, users
 from app.database import engine
 from app import models
 
@@ -8,3 +8,4 @@ from app import models
 app = FastAPI()
 
 app.include_router(router=products.router)
+app.include_router(router=users.router)
