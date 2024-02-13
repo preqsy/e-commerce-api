@@ -15,7 +15,7 @@ def create_users(user:UserCreate, db:Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Input all fields")
     hashed_password = hash(user.password)
     user.password = hashed_password
-    new_user = models.Users(**user.dict())
+    new_user = models.Customer(**user.dict())
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
