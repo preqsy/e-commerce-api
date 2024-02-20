@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 from app.database import get_db
+from app.oauth2 import get_current_user
 from schemas.products import ProductCreate, ProductReturn, ProductUpdate
 from app import models
 from app.models import *
@@ -8,7 +9,7 @@ from typing import List
 router = APIRouter(prefix="/products")
 
 @router.get("/", response_model=List[ProductReturn])
-def get_all_products(db:Session = Depends(get_db)):
+def get_all_products(db:Session = Depends(get_db),current_user=Depends(get_current_user)):
     all_products = db.query(models.Products).all()
     if all_products == []:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"no products")
@@ -22,7 +23,7 @@ def get_single_product(id: int, db:Session = Depends(get_db)):
     return single_product
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
-def get_products(product:ProductCreate, db:Session = Depends(get_db)):
+def get_products(product:ProductCreate, db:Session = Depends(get_db),current_user:int=Depends(get_current_user)):
     new_product = models.Products(**product.dict())
     db.add(new_product)
     db.commit()
