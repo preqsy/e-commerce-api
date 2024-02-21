@@ -9,7 +9,7 @@ from schemas.users import AuthUserCreate, AuthUserUpdate
 
 router = APIRouter(prefix="/auth")
 
-@router.post("/register", status_code=status.HTTP_201_CREATED)
+@router.post("/register", status_code=status.HTTP_201_CREATED, response_model=AuthUserUpdate)
 def create_users(user:AuthUserCreate, db:Session = Depends(get_db)):
     if not user.password or not user.email or not user.username:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Input all fields")
@@ -31,14 +31,3 @@ def update_auth_user(auth_user:AuthUserUpdate, db:Session = Depends(get_db)):
     db.commit()
     return user.first()
     
-# @router.post("/vendor", status_code=status.HTTP_201_CREATED)
-# def create_vendor(user:AuthUserCreate, db:Session = Depends(get_db)):
-#     if not user.password or not user.email or not user.phone_number:
-#         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Input all fields")
-#     hashed_password = hash(user.password)
-#     user.password = hashed_password
-#     new_user = models.Vendor(**user.dict())
-#     db.add(new_user)
-#     db.commit()
-#     db.refresh(new_user)
-#     return new_user

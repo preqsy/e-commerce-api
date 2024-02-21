@@ -27,7 +27,7 @@ def verify_access_token(token, credentials_exception):
     except JWTError:
         raise credentials_exception
     return token_data
-def get_current_user(
+def get_current_auth_user(
     token = Depends(oauth2_scheme)
 ):
     credentials_exception = HTTPException(
@@ -35,6 +35,6 @@ def get_current_user(
         detail="Could'nt validate credential",
         headers={"WWW-Authenticate": "Bearer"},
     )
-    verify_access_token(
+    return verify_access_token(
         token=token, credentials_exception=credentials_exception
     )

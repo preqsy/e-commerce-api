@@ -11,6 +11,14 @@ class AuthUserCreate(BaseModel):
     address : Optional[str] = None
     default_role: Roles
     phone_number: str
+    
+class AuthUserUpdate(BaseModel):
+    full_name: str
+    email: EmailStr
+    username: str
+    address : Optional[str] = None
+    default_role: Roles
+    phone_number: str
 class AuthUserUpdate(BaseModel):
     full_name: str
     email: EmailStr
