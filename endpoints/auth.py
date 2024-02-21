@@ -6,6 +6,7 @@ from app.database import get_db
 from app import models
 from app.utils import verify
 from app.oauth2 import create_access_token
+from schemas.users import AuthUserUpdate
 
 
 router = APIRouter(tags=["Authentication"])
